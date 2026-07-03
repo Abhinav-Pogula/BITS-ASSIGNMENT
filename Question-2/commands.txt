@@ -1,0 +1,12 @@
+umask
+mkdir -p ProjectWorkspace/docs ProjectWorkspace/src ProjectWorkspace/logs
+ls -la ProjectWorkspace/
+touch ProjectWorkspace/docs/readme.txt
+ls -l ProjectWorkspace/docs/readme.txt
+chmod 750 ProjectWorkspace/docs/readme.txt
+ls -l ProjectWorkspace/docs/readme.txt
+touch ProjectWorkspace/src/main.sh ProjectWorkspace/logs/activity.log
+chmod 700 ProjectWorkspace/src/main.sh
+chmod 640 ProjectWorkspace/logs/activity.log
+ls -l ProjectWorkspace/src/main.sh ProjectWorkspace/logs/activity.log
+stat ProjectWorkspace/docs/readme.txt

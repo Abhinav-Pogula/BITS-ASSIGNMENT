@@ -1,0 +1,34 @@
+===== PROJECT WORKSPACE REPORT =====
+
+--- Umask Value ---
+0022
+
+--- Directory Structure Created ---
+ProjectWorkspace/
+    docs/
+        readme.txt
+    src/
+        main.sh
+    logs/
+        activity.log
+
+--- Permissions BEFORE Modification ---
+-rw-rw-rw- 1 codespace codespace 0 readme.txt
+
+--- Permissions AFTER Modification ---
+-rwxr-x--- 1 codespace codespace 0 readme.txt   (chmod 750)
+-rwx------ 1 codespace codespace 0 main.sh      (chmod 700)
+-rw-r----- 1 codespace codespace 0 activity.log (chmod 640)
+
+--- Ownership Details ---
+File: ProjectWorkspace/docs/readme.txt
+Uid: (1000/codespace)   Gid: (1000/codespace)
+Inode: 1310859
+
+--- How Permissions Protect Project Data ---
+Restricting file permissions ensures that only authorized users can read, 
+write, or execute sensitive project files. For example, chmod 700 on 
+main.sh ensures only the file owner can execute it, preventing unauthorized 
+users from running project scripts. Similarly, chmod 640 on activity.log 
+allows the owner to write logs while letting the group only read them, 
+protecting log integrity from tampering by non-owners.
