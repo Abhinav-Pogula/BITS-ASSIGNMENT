@@ -1,0 +1,20 @@
+1310882 -rw-rw-rw- 1 codespace codespace 27 Jul  3 12:10 original.txt
+1310882 -rw-rw-rw- 2 codespace codespace 27 Jul  3 12:10 hardlink.txt
+1310882 -rw-rw-rw- 2 codespace codespace 27 Jul  3 12:10 original.txt
+1310884 lrwxrwxrwx 1 codespace codespace 12 Jul  3 12:10 symlink.txt -> original.txt
+  File: original.txt
+  Size: 27              Blocks: 8          IO Block: 4096   regular file
+Device: 7,4     Inode: 1310882     Links: 2
+Access: (0666/-rw-rw-rw-)  Uid: ( 1000/codespace)   Gid: ( 1000/codespace)
+  File: hardlink.txt
+  Size: 27              Blocks: 8          IO Block: 4096   regular file
+Device: 7,4     Inode: 1310882     Links: 2
+Access: (0666/-rw-rw-rw-)  Uid: ( 1000/codespace)   Gid: ( 1000/codespace)
+  File: symlink.txt -> original.txt
+  Size: 12              Blocks: 0          IO Block: 4096   symbolic link
+Device: 7,4     Inode: 1310884     Links: 1
+Access: (0777/lrwxrwxrwx)  Uid: ( 1000/codespace)   Gid: ( 1000/codespace)
+This is the original file.
+1310882 -rw-rw-rw- 1 codespace codespace 27 Jul  3 12:10 hardlink.txt
+cat: symlink.txt: No such file or directory
+1310884 lrwxrwxrwx 1 codespace codespace 12 Jul  3 12:10 symlink.txt -> original.txt

@@ -1,0 +1,47 @@
+===== LINK ANALYSIS REPORT =====
+
+--- Inode Numbers (before deletion) ---
+original.txt : Inode 1310882
+hardlink.txt  : Inode 1310882 (same as original.txt)
+symlink.txt   : Inode 1310884 (different, own inode)
+
+--- Comparison: Hard Link vs Symbolic Link ---
+Hard Link (hardlink.txt):
+  - Shares the same inode number as the original file.
+  - Points directly to the same data on disk.
+  - Link count on the inode was 2 while both names existed.
+  - Cannot span across different filesystems/partitions.
+
+Symbolic Link (symlink.txt):
+  - Has its own unique inode number.
+  - Stores only the path/text "original.txt", not the actual data.
+  - File type shown as "symbolic link" (l in permissions: lrwxrwxrwx).
+  - Can span across different filesystems.
+
+--- Effect of Deleting the Original File ---
+After running "rm original.txt":
+  - hardlink.txt: STILL WORKS. Content ("This is the original file.") 
+    was still readable via cat. Link count dropped from 2 to 1, but 
+    since the hard link references the same inode/data blocks, the 
+    file data was not deleted.
+  - symlink.txt: BROKEN. Running "cat symlink.txt" returned 
+    "No such file or directory" because the symlink only pointed to 
+    the filename "original.txt", which no longer exists. This is 
+    called a "dangling" symbolic link.
+
+--- Metadata Collected (via stat) ---
+original.txt (before deletion): Inode 1310882, Links: 2, Size: 27 bytes
+hardlink.txt: Inode 1310882, Links: 2 (before) -> 1 (after deletion)
+symlink.txt: Inode 1310884, Links: 1, Size: 12 bytes (length of target path)
+
+--- Conclusions ---
+1. A hard link is essentially a second directory entry pointing to the 
+   same underlying inode/data as the original file. Deleting one name 
+   does not delete the data as long as at least one hard link remains.
+2. A symbolic link is a separate, independent file that simply stores 
+   a reference (path) to another file. If the target is deleted or 
+   moved, the symlink becomes broken/dangling.
+3. Hard links provide resilience against accidental deletion of a 
+   single filename, while symbolic links are more flexible (can point 
+   across filesystems, to directories, etc.) but are fragile if the 
+   target is removed.

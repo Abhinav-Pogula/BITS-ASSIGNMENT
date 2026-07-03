@@ -1,0 +1,15 @@
+mkdir LinkAnalysis
+cd LinkAnalysis
+echo "This is the original file." > original.txt
+ls -li original.txt
+ln original.txt hardlink.txt
+ln -s original.txt symlink.txt
+ls -li original.txt hardlink.txt symlink.txt
+stat original.txt
+stat hardlink.txt
+stat symlink.txt
+rm original.txt
+cat hardlink.txt
+ls -li hardlink.txt
+cat symlink.txt
+ls -li symlink.txt
