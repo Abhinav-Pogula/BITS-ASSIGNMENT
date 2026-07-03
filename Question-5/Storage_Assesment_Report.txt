@@ -1,0 +1,7 @@
+===== STORAGE ASSESSMENT REPORT - Question 5 (made in vi) =====
+1. Available storage devices: collected using lsblk.
+2. Mounted file systems: collected using df -h.
+3. Disk usage statistics: collected using df -h.
+4. Inode utilization: collected using df -i.
+5. Storage health observations: disk and inode usage are within safe limits, health is good.
+6. Recommendations: remove unused files and logs, monitor with df -h, expand storage before 80%, use du -sh to find large folders.

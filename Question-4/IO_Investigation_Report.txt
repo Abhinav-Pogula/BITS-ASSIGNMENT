@@ -1,0 +1,51 @@
+===== I/O INVESTIGATION REPORT =====
+
+--- Open Files (lsof -p $$) ---
+FD 0, 1, 2, 255 -> /dev/pts/3 (terminal, read/write)
+FD 6 -> /dev/null (write-only)
+Plus shared libraries loaded into memory (libc, ld-linux, locale files, etc.)
+
+--- File Descriptor Observations (/proc/$$/fd) ---
+0 -> /dev/pts/3  (stdin)
+1 -> /dev/pts/3  (stdout)
+2 -> /dev/pts/3  (stderr)
+6 -> /dev/null   (custom redirected fd)
+255 -> /dev/pts/3 (bash internal bookkeeping)
+
+--- Output Redirection Results ---
+Command: echo "This is standard output" > output_test.txt
+Result: File contained "This is standard output" -- stdout correctly 
+redirected, overwriting the file.
+
+--- Error Redirection Results ---
+Command: ls /nonexistent_folder 2> error_test.txt
+Result: File contained "ls: cannot access '/nonexistent_folder': No such 
+file or directory" -- only the error stream was captured, terminal 
+showed no output for this command.
+
+--- Combined Redirection Results ---
+Command: ls /nonexistent_folder /etc > combined_test.txt 2>&1
+Result: File contained BOTH the error message AND the full directory 
+listing of /etc -- confirming 2>&1 merges stderr into stdout so both 
+streams go to the same destination.
+
+--- Resource Limits (ulimit -a) ---
+open files (-n): 524288
+max locked memory (-l): 8192 KB
+stack size (-s): 8192 KB
+file size (-f): unlimited
+cpu time (-t): unlimited
+virtual memory (-v): unlimited
+max user processes (-u): unlimited
+
+--- How Linux Manages File I/O ---
+Every process in Linux is given a table of file descriptors, small 
+integers that reference open files. By default, FD 0 is stdin, FD 1 is 
+stdout, and FD 2 is stderr, all typically pointing to the controlling 
+terminal. Redirection operators (>, >>, 2>, 2>&1) reassign these file 
+descriptors to point at different destinations, such as regular files 
+or /dev/null, without changing how a program itself writes -- the 
+program still just writes to FD 1 or FD 2, and the shell decides where 
+that data actually goes. Resource limits (ulimit) cap how many files a 
+process can have open at once and other resource usage, protecting the 
+system from runaway processes.
