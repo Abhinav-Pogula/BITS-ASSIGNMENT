@@ -1,0 +1,7 @@
+whoami
+id
+groups
+echo $SHELL
+pwd
+ls -la
+curl -Is https://google.com | head -1

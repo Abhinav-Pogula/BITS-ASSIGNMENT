@@ -1,8 +1,13 @@
+]633;E;echo "===== ENVIRONMENT REPORT =====";2db34db9-2146-41a2-8e3b-eea39969fe1e]633;C===== ENVIRONMENT REPORT =====
+--- Username & Groups ---
 codespace
 uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),985(pipx),986(python),987(oryx),988(golang),989(docker),990(sdkman),991(rvm),992(php),993(conda),994(nvs),995(nvm),996(hugo),1001(ssh)
 codespace pipx python oryx golang docker sdkman rvm php conda nvs nvm hugo ssh
+--- Shell ---
 /bin/bash
+--- Working Directory ---
 /workspaces/BITS-ASSIGNMENT
+--- Files & Directories ---
 total 40
 drwxrwxrwx+ 8 codespace root      4096 Jul  3 11:30 .
 drwxr-xrwx+ 5 codespace root      4096 Jul  3 11:18 ..
@@ -14,4 +19,6 @@ drwxrwxrwx+ 3 codespace codespace 4096 Jul  3 11:24 Question-3
 drwxrwxrwx+ 3 codespace codespace 4096 Jul  3 11:24 Question-4
 drwxrwxrwx+ 3 codespace codespace 4096 Jul  3 11:24 Question-5
 -rw-rw-rw-  1 codespace root        17 Jul  3 11:24 README.md
-HTTP/2 301
+--- Network Check ---
+Note: ping not available in this container; used curl instead
+HTTP/2 301 
