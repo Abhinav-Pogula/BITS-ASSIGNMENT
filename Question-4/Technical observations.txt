@@ -1,0 +1,25 @@
+
+Technical Observations.
+
+1. The `lsof` command showed the files currently opened by running processes, including regular files, directories, shared libraries, and standard input/output streams.
+
+2. Every Linux process uses file descriptors to access files and I/O resources. By default:
+   - File Descriptor 0 (stdin) is used for keyboard input.
+   - File Descriptor 1 (stdout) is used for standard output.
+   - File Descriptor 2 (stderr) is used for error messages.
+
+3. Output redirection (`>`) successfully redirected standard output to a file without displaying it on the terminal.
+
+4. Error redirection (`2>`) redirected only error messages to a separate file while normal output continued to appear on the terminal.
+
+5. Combined redirection (`> file 2>&1`) stored both standard output and error output in a single file, which is useful for debugging and maintaining logs.
+
+6. Resource limits observed using `ulimit -a` indicate the maximum system resources available to a process, including open files, stack size, CPU time, and virtual memory.
+
+7. Linux follows the principle that "everything is a file." Regular files, devices, pipes, sockets, and terminals are all accessed through the same file I/O interface.
+
+8. The Linux kernel manages file I/O using system calls such as `open()`, `read()`, `write()`, `close()`, and `lseek()`, while maintaining file descriptor tables for each process.
+
+9. Proper use of file descriptors and output redirection helps separate normal program output from error messages, making troubleshooting and logging more efficient.
+
+10. The investigation confirmed that Linux provides a consistent and efficient mechanism for managing file access, process I/O, and system resource limits.

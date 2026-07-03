@@ -1,0 +1,19 @@
+# List open files
+lsof
+
+# Display resource limits
+ulimit -a
+
+# Redirect standard output to a file
+echo "Linux File I/O" > output_test.txt
+
+# Generate an error and redirect stderr to a file
+ls /does/not/exist 2> error_test.txt
+
+# Redirect both stdout and stderr to the same file
+(ls . && ls /does/not/exist) > combined_test.txt 2>&1
+
+# Display the contents of the generated files
+cat output_test.txt
+cat error_test.txt
+cat combined_test.txt
